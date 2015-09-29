@@ -35,7 +35,7 @@
   (even? 4))
 ;;可变参函数，下面函数中的rest被称为剩余参数
 (defn concat-rest
-  [x & rest]
+  [_ & rest]
   (apply str (butlast rest)))
 (concat-rest 1 2 3 4)
 ;;剩余参数可以像其他序列那样解构
