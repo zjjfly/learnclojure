@@ -1,5 +1,7 @@
 package learnclojure.chapt2;
 
+import clojure.lang.Numbers;
+
 /**
  * Created by jjzi on 2015/9/30.
  */
@@ -25,7 +27,7 @@ public class StatefulInteger extends Number {
 
     @Override
     public long longValue() {
-        return 0;
+        return (long) state;
     }
 
     @Override
@@ -40,11 +42,5 @@ public class StatefulInteger extends Number {
 
     public void setInt(int newState) {
         this.state = newState;
-    }
-
-    public static void main(String args[]){
-        StatefulInteger five=new StatefulInteger(5);
-        StatefulInteger six=new StatefulInteger(6);
-        System.out.print( clojure.lang.Util.equiv(five,six));
     }
 }
