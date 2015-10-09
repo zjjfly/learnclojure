@@ -82,6 +82,15 @@
 (let [m-prime? (memoize prime?)]
 (time (m-prime? 1125899906842679))
 (time (m-prime? 1125899906842679)))
-(rand-int 2)
+;;有副作用的函数就不是引用透明的，所以不能内存化
+;;如果内存化rand-int，会如何？
+(repeatedly 10 (partial rand-int 10))
+;=(6 4 5 1 2 2 9 1 9 8)
+(repeatedly 10 (partial (memoize rand-int) 10))
+;=(8 8 8 8 8 8 8 8 8 8),rand-int不再是产生随机数
+;;memoize会保存所以调用参数和返回值的映射，不会被回收
+;;所以一个函数取值范围很广，或者参数、返回值很占内存的话，会导致内存泄漏
+;;解决方法1.不要把它们定义成顶层函数，而是放在顶层函数内部，只在需要的时候调用
+;;2.使用core.memoize库
 
 
