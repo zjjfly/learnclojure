@@ -1,5 +1,6 @@
 (ns learnclojure.chapt2.core3
-  (:import (java.util Date)))
+  (:import (java.util Date)
+           (java.io StringWriter)))
 ;;高阶函数
 ;;一个返回摸个给定数字与它的参数的和的函数
 (defn adder
@@ -25,7 +26,7 @@
 (def *out*-logger (print-logger *out*))
 (*out*-logger "hello")
 ;;把消息打印到一个内存buffer,使用java.io.StringWriter
-(def writer (java.io.StringWriter.))
+(def writer (StringWriter.))
 (def retained-logger (print-logger writer))
 (retained-logger "hehe")
 (str writer)
@@ -76,12 +77,12 @@
                (filter #(zero? (rem n %)))
                empty?)))
 ;;数字大的时候函数运行时间比较长
-(time  (prime? 1125899906842679))
+(time (prime? 1125899906842679))
 ;;用memoize缓存prime？，函数调用一次后再以相同的参数调用会马上返回结果
 ;;所以下面的第二次调用(m-prime? 1125899906842679)比第一次快的多
 (let [m-prime? (memoize prime?)]
-(time (m-prime? 1125899906842679))
-(time (m-prime? 1125899906842679)))
+  (time (m-prime? 1125899906842679))
+  (time (m-prime? 1125899906842679)))
 ;;有副作用的函数就不是引用透明的，所以不能内存化
 ;;如果内存化rand-int，会如何？
 (repeatedly 10 (partial rand-int 10))
