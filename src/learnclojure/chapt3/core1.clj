@@ -21,6 +21,23 @@
 ;;1.是根据抽象来使用的，而不是具体的实现细节
 ;;2.数据结构是不可改变和持久的
 
+;;抽象由于实现
+;;100个函数操作一个数据解构比10个函数操作10种数据解构要好（出自SICP书序）
+;;vector的一些操作
+(def v [1 2 3])
+(conj v 4)
+(conj v 4 5)
+(seq v)
+;;map的一些操作
+(def m {:a 4 :b 5})
+(conj m [:c 6])
+(seq m)
+;;set操作
+(def s #{1 2 3})
+(conj s 10)
+(sorted-set )
+(conj s 3 4)
+(seq s)
 ;;list的操作
 (def lst '(1 2 3))
 ;;list的conj操作是把要插入的数据放在list前面的
