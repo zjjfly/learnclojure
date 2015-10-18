@@ -50,4 +50,15 @@
 ;;显然，seq和conj对于它们所操作的集合类型是多态的
 ;;clojure的精髓是小而易用的编程接口，在接口上再构建辅助函数
 ;;例如into函数,它是建立在conj和seq之上的,所以能用于任何支撑conj和seq的值
+(into v [4 5])
+(into m [[:c 7] [:d 8]])
+(into s [3 4])
+//map的seq是一个键值对序列，conj会保留键值对解构
+(into  [1] {:a 1} )
+;;=[1 [:a 1]]
+
+;;构建小而广泛支持的抽象是clojure设计的核心原则
+;;clojure集合中实现的几个主要抽象：
+;;1.Collection 2.Sequence 3.Associative 4.Indexed 5.Stack 6.Set 7.Sorted
+;;接下来会细讲基于这些抽象来使用clojure的数据结构
 
