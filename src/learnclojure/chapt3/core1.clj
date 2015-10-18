@@ -53,7 +53,7 @@
 (into v [4 5])
 (into m [[:c 7] [:d 8]])
 (into s [3 4])
-//map的seq是一个键值对序列，conj会保留键值对解构
+;;map的seq是一个键值对序列，conj会保留键值对解构
 (into  [1] {:a 1} )
 ;;=[1 [:a 1]]
 
