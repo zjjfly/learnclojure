@@ -21,3 +21,16 @@
   :z 6)
 (dissoc m :a :c)
 
+;;虽然这些函数通常用来操作map，但get和assoc也可以用来操作vector
+;;vector也可以看出关系型数据结构，只是它的key是数组下标
+(def v [2 6 9])
+(get v 1)
+(get v 10)
+(get v 10 "not found!")
+;;assoc可以更新数组中某个下标对应的值
+(assoc v
+  1 4
+  0 -12
+  2 :p)
+
+
