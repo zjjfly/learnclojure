@@ -67,6 +67,14 @@
 ;;我们可以使用find，它返回的是键值对如果map里包含指定的key的话，返回nil如果不包含这个key
 (find {:ethl nil} :ethl)
 (find {:ethl nil} :r)
+;;find也很容易和解构形式if-let，when-let一起用
+(if-let [e (find {:a 5 :b 6} :a)]
+  (format "found %s=>%s" (key e) (val e))
+  "not found")
+(if-let [[k v] (find {:a 5 :b 6} :a)]
+  (format "found %s=>%s" k v)
+  "not found")
+;;当被用在条件判断中的时候，false在关系型集合中和nil有同样的问题，解决方法和nil一样
 
 
 
