@@ -8,7 +8,7 @@
 (nth [:a :b :c] 2)
 (get [:a :b :c] 2)
 ;;nth在越界的时候会报IndexOutOfBoundsException
-(nth [:a :b :c] 3)
+;;(nth [:a :b :c] 3)
 ;;get返回nil，不报错
 (get [:a :b :c] 3)
 
@@ -18,7 +18,7 @@
 ;;它们另一个区别是，get对错误更容忍，当你传给它一个不支持的数据类型，它也返回nil而不是抛出异常
 (get 42 0)
 ;;用nth会报错
-(nth 42 0)
+;;(nth 42 0)
 ;;clojure中的vector本身就支持nth语义，比调用nth更方便
 (def v [1 2 3])
 (v 0)
@@ -47,4 +47,8 @@
 ;;对一个空栈调用pop会报错
 ;;(pop [])
 
+;;set接口
+;;从set中删除一个元素用disj
+(disj #{1 2 4} 1 2)
+;;clojure.set提供了一些有用的函数，如subset?、superset?、union、intersection、project等
 
