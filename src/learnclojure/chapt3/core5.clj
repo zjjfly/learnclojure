@@ -52,3 +52,28 @@
 (disj #{1 2 4} 1 2)
 ;;clojure.set提供了一些有用的函数，如subset?、superset?、union、intersection、project等
 
+;;sorted 有序集合
+;;实现sorted抽象的集合北一特定的顺序保存，顺序可以通过一个谓词函数或者一个特定的comparator接口来定义。
+;;这使得我们可以高效，正序(或反序)的获取集合或者获取集合的一部分。这个接口包括以下函数
+;;1.rseq函数可以在常量时间内反序的返回一个集合的函数
+;;2.subseq函数可以返回一个集合的某一个区间的元素的序列
+;;3.rsubseq，和subseq类似，但返回的元素是反序的
+
+;;只有map和set实现了sorted接口，没有字面量来表示sorted集合，要创建sorted集合可以用sorted-map和sorted-set来创建有序的map和set。
+;;如果要用谓词或比较器来定义排序规则的话，要用sorted-map-by和sorted-set-by
+(def sm (sorted-map :z 5 :x 9 :y 0 :b 2 :a 3 :c 4))
+sm
+(rseq sm)
+;;subseq的谓词函数必须是>、<、>=、<=
+(subseq sm <= :c)
+(subseq sm > :b <= :y)
+(rsubseq sm > :b <= :y)
+;;因为sm本身是有序的，对于相同的结果，在sm上调用这些函数比在普通seq上调用要快的多
+
+;;compare函数定义默认排序 正序。它支持clojure所有的标量和顺序集合，它会按照字典排序法对每一层元素排序
+(compare 2 2)
+(compare "ab" "abc")
+(compare ["a" "b" "c"] ["a" "b"])
+(compare ["a" 2 0] ["a" 2])
+
+
