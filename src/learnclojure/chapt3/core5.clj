@@ -1,4 +1,5 @@
-(ns learnclojure.chapt3.core5)
+(ns learnclojure.chapt3.core5
+  (:import (java.util Collections ArrayList)))
 ;;Indexed接口
 ;;到目前为止，我们一直回避讨论怎么直接获取vector的第n个值，或者直接修改vector的第n个值
 ;;原因是下标是新的指针
@@ -75,5 +76,31 @@ sm
 (compare "ab" "abc")
 (compare ["a" "b" "c"] ["a" "b"])
 (compare ["a" 2 0] ["a" 2])
+;;compare不仅支持字符串，数字以及顺序集合，它还支持任何实现java.lang.Comparable接口的值，包括布尔值、关键字、符号
+;;以及所有实现了这个接口的java类，compare是很强大的函数，但也只是默认的比较强
 
+;;比较器是一个接受两个参数的函数，如果第一个参数大于第二个参数，就返回正数；如果第一个参数小于第二个参数则返回负数，如果相等则返回0
+;;clojure里面所有的函数都实现了java.util.Comparator接口，所有它们都是潜在的比较器，但明显并不是所有函数都是设计来作为比较器的
+;;也不需要一定实现Comparator接口才能实现一个比较器，任何一个两个参数的谓词都可以。
+;;不用实现一个特定接口节能定义一个比较器也意味着可以很容易定义多层排序：先按照一个规则排序，在这个基础上再按另一个规则排序。
+;;要实现只要定义一个高阶函数就可以了。
+;;比较函数可以直接传给有序集合的工厂函数，如sorted和sorted-by(或者任何一个java.util.Comparator作为参数的JavaAPI)
+;;生成一个有10个元素的惰性序列，并从小到大排序
+;;里面的compare原来是<,我换成了compare，这样惰性序列的元素可以是任意实现了comparable接口的类的实例
+(sort compare (repeatedly 10 #(rand-int 100)))
+;;map-indexed函数返回一个lazy-seq，它的参数是一个函数f和一个集合col，
+;;返回值的第一个元素是(f [0 col0]),第二个元素是(f [1 col1]).....
+;;下面的表达式是对一个元素是多个vector的lazy-seq排序结果，按照它的vector的第一个元素从大到小排序
+(sort-by first > (map-indexed vector "clojure"))
+;;sort用于元素是非集合的集合排序，而sorted by 对于元素是集合的集合排序
 
+;;clojure怎么把一个谓词变成一个比较器的呢？
+;;对于谓词fn，先顺序调用谓词(fn a b)如果为true，返回-1否则反序调用谓词(fn b a)，如果是true返回1，否则返回0
+;;comparator就是使用这个原理吧一个两参谓词转换成一个比较器函数的
+(def less (comparator <))
+(less 1 4)
+;;=-1
+(less 4 1)
+;;=1
+(less 1 1)
+;;但我们很少这么干，因为clojure里面接受比较器作为参数的函数都默认做了这个转换，而且两参函数已经实现了java.util.Comparator接口
