@@ -1,5 +1,4 @@
-(ns learnclojure.chapt3.core5
-  (:import (java.util Collections ArrayList)))
+(ns learnclojure.chapt3.core5)
 ;;Indexed接口
 ;;到目前为止，我们一直回避讨论怎么直接获取vector的第n个值，或者直接修改vector的第n个值
 ;;原因是下标是新的指针
