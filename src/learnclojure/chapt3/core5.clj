@@ -62,7 +62,7 @@
 ;;只有map和set实现了sorted接口，没有字面量来表示sorted集合，要创建sorted集合可以用sorted-map和sorted-set来创建有序的map和set。
 ;;如果要用谓词或比较器来定义排序规则的话，要用sorted-map-by和sorted-set-by
 (def sm (sorted-map :z 5 :x 9 :y 0 :b 2 :a 3 :c 4))
-sm
+(conj sm [:d 5])
 (rseq sm)
 ;;subseq的谓词函数必须是>、<、>=、<=
 (subseq sm <= :c)
@@ -91,7 +91,7 @@ sm
 ;;返回值的第一个元素是(f [0 col0]),第二个元素是(f [1 col1]).....
 ;;下面的表达式是对一个元素是多个vector的lazy-seq排序结果，按照它的vector的第一个元素从大到小排序
 (sort-by first > (map-indexed vector "clojure"))
-;;sort用于元素是非集合的集合排序，而sorted by 对于元素是集合的集合排序
+;;sort用于元素是非集合的集合排序，而sorted by 对于元素是集合的集合排序，其中的比较器参数可以省略，默认是用compare
 
 ;;clojure怎么把一个谓词变成一个比较器的呢？
 ;;对于谓词fn，先顺序调用谓词(fn a b)如果为true，返回-1否则反序调用谓词(fn b a)，如果是true返回1，否则返回0
@@ -103,3 +103,5 @@ sm
 ;;=1
 (less 1 1)
 ;;但我们很少这么干，因为clojure里面接受比较器作为参数的函数都默认做了这个转换，而且两参函数已经实现了java.util.Comparator接口
+
+;;所以，sorted-map和sorted-set是通过compare来定义默认规则进行排序的map和set
