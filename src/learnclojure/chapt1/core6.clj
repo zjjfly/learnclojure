@@ -36,7 +36,8 @@
 (true? "ad")
 (if "ad" \t \f)
 ;;逻辑上的true和下面的式子等价
-#(or (not  (nil? %)) (true? %))
+(def logic-true #(and  (not  (nil? %)) (not (false? %))))
+(logic-true "da")
 
 ;;循环：loop和recur
 ;;clojure有好几个有用的循环结构，比如doseq和dotimes，都是构建在recur之上的
