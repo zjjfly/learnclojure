@@ -91,7 +91,7 @@
 ;;返回值的第一个元素是(f [0 col0]),第二个元素是(f [1 col1]).....
 ;;下面的表达式是对一个元素是多个vector的lazy-seq排序结果，按照它的vector的第一个元素从大到小排序
 (sort-by first > (map-indexed vector "clojure"))
-;;sort用于元素是非集合的集合排序，而sorted by 对于元素是集合的集合排序，其中的比较器参数可以省略，默认是用compare
+;;sort用于元素是非集合的集合排序，而sorted by 对于元素是集合的集合排序，它们的比较器参数可以省略，会默认使用compare
 
 ;;clojure怎么把一个谓词变成一个比较器的呢？
 ;;对于谓词fn，先顺序调用谓词(fn a b)如果为true，返回-1否则反序调用谓词(fn b a)，如果是true返回1，否则返回0
@@ -105,3 +105,25 @@
 ;;但我们很少这么干，因为clojure里面接受比较器作为参数的函数都默认做了这个转换，而且两参函数已经实现了java.util.Comparator接口
 
 ;;所以，sorted-map和sorted-set是通过compare来定义默认规则进行排序的map和set
+;;sorted-map-by和sorted-set-by接受一个比较器(任何两参的微词函数也可以)来定义排序规则
+;;除了compare之外，能传给有序集合的最简单的比较器可能是(comp - compare)了，正好定义了compare的反序
+(sorted-map-by compare :z 5 :x 9 :y 0 :b 2 :a 3 :c 4)
+(sorted-map-by (comp - compare) :z 5 :x 9 :y 0 :b 2 :a 3 :c 4)
+
+;;需要注意，排序规则在有序map和有序set中也同时定义了两个元素是否相等，这个特点有时候会产生逻辑正确但让人吃惊的结果。
+;;例子:有一个函数来计算参数是10的几次方
+(defn magnitude
+  [x]
+  (-> x Math/log10 Math/floor))
+(magnitude 100)
+(magnitude 100000)
+;;现在用magnitude创建一个谓词函数
+(defn compare-magnitude
+  [a b]
+  (neg? (- (magnitude a) (magnitude b))))
+(def comparator-magnitued (comparator compare-magnitude))
+(comparator-magnitued 10 10000)
+(comparator-magnitued 10000 10)
+(comparator-magnitued 10 66)
+
+
