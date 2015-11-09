@@ -28,11 +28,13 @@
 (strange-adder 1 2)
 ;;letfn可以定义同时定义多个具名函数，并且这些函数可以互相引用
 (letfn [(odd? [n]
-              (even? (- n 2)))
+              (if (zero? n)
+                false
+                (even? (dec n))))
         (even? [n]
                (or (zero? n)
-                   (odd? (- n 2))))]
-  (even? 4))
+                   (odd? (dec n))))]
+  (odd? 12))
 ;;可变参函数，下面函数中的rest被称为剩余参数
 (defn concat-rest
   [_ & rest]
