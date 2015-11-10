@@ -125,5 +125,28 @@
 (comparator-magnitued 10 10000)
 (comparator-magnitued 10000 10)
 (comparator-magnitued 10 66)
+;;当我们把这个谓词函数用在一个有序集合里面时，有趣的事情发生了
+(sorted-set-by compare-magnitude 10 1000 500)
+;;*1绑定的是最近在repl中打印的值
+(conj *1 600)
+;=#{10 500 1000}
+(conj *1 750)
+;=#{10 500 1000}
+(contains? *1 1239)
+;=true
+;;把600和750放入集合，集合没有变化，这是因为它们都是10的二次方因此对于比较器来说，它们和500是相等的，500已在集合中，所以不会把它们加进去
+;;类似的，1239和1000是等价的，所以用contains？来检查集合中是否包含1239的时候返回true；
+
+;;有时候比较器行为是你预期的，有时候则不是，比较器的语义我们可以完全控制，
+;;因此虽然用已有的谓词作为比较器比较方便，时也可以选择直接返回正数负数或0来使得比较器相等性更符合预期
+;;修改后的compare-magnitude:
+(defn compare-magnitude
+  [a b]
+  (let [diff (- (magnitude a) (magnitude b))]
+    (if (zero? diff)
+      (compare a b)
+      diff)))
+(sorted-set-by compare-magnitude 10 1000 500)
+
 
 
