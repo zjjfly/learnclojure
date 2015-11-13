@@ -167,9 +167,24 @@
 ;;我们提拔方法>、>=、<、<=来指定需要的元素区间，其他比较器也是可以的
 
 ;;应用：线性牛顿插值
-(def m (into (sorted-map) (map vec [[0 0] [10 10] [15 5]])))
-(rsubseq m <= 2)
-(subseq m > 2)
+(defn interpolate
+  "take a collection of points,return a function which is a linear interpolation between those points."
+  [points]
+  (let [results (into (sorted-map) (map vec points))]
+    (fn [x]
+      (let [[xa ya] (first (rsubseq results <= x))
+            [xb yb] (first (subseq results > x))]
+        (if (and xa xb)
+          (/ (+ (* ya (- xb x)) (* yb (- x xa)))
+             (- xb xa))
+          (or ya yb))))))
+;;(map vec points)确保每个点都是vector表示的，从而可以加入map
+;;测试一下，有已知的三个点[0 0] [10 10] [15 5]
+(def f (interpolate [[0 0] [10 10] [15 5]]))
+(map f [2 10 12])
+;;=(2 10 8)
+;;perfect!
+
 
 
 
