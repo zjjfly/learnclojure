@@ -68,7 +68,7 @@
 
 ;;remove作用和filter相反，它把符合谓词的元素从集合中去除掉，返回所有不符合谓词要求的元素。相当于(filter (complement f) collection)
 
-;;收set来测试结合中是否包含某个元素非常方便，但不要忘记，如果检查的元素是nil或false，那么结果可能就和我们预期的不一样了。
+;;收set来测试结合中是否包含某个元素非常方便(因为set的key是其本身)，但不要忘记，如果检查的元素是nil或false，那么结果可能就和我们预期的不一样了。
 ;;因为这两个值在逻辑上就是false
 (remove #{5 7} (cons false (range 10)))
 ;=(false 0 1 2 3 4 6 8 9)
