@@ -35,7 +35,6 @@
 ;;set操作
 (def s #{1 2 3})
 (conj s 10)
-(sorted-set )
 (conj s 3 4)
 (seq s)
 ;;list的操作

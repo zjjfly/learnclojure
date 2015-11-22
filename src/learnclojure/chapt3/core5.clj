@@ -95,7 +95,7 @@
 
 ;;clojure怎么把一个谓词变成一个比较器的呢？
 ;;对于谓词fn，先顺序调用谓词(fn a b)如果为true，返回-1否则反序调用谓词(fn b a)，如果是true返回1，否则返回0
-;;comparator就是使用这个原理吧一个两参谓词转换成一个比较器函数的
+;;comparator就是使用这个原理把一个两参谓词转换成一个比较器函数的
 (def less (comparator <))
 (less 1 4)
 ;;=-1
