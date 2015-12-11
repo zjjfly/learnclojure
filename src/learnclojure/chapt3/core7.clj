@@ -77,3 +77,60 @@
 (numeric? "11dad414")
 ;=false
 ;;也可以定义有序的set，前面已经介绍过了。
+
+;;map
+;;和set一样，map里的key也要保证是唯一的，否则会报错。
+;;通过hash-map可以来创建无序的map
+(hash-map :a 3)
+;;这个函数通常和apply一起用
+(apply hash-map [:a 3 :b 4])
+;;也可以创建有序的map，前面已经介绍过。
+
+;;keys和vals，可以很方便的返回一个map的所有key和value
+(def m {:a 1 :b 2 :c 3})
+(keys m)
+;=(:a :b :c)
+(vals m)
+;=(1 2 3)
+;;这两个函数实际上是先获取map的键值对序列，然后在对序列应用key或val函数
+(map key m)
+;=(:a :b :c)
+(map val m)
+;=(1 2 3)
+;;map作为临时struct
+;;因为map里面的值可以是任意的类型，所有经常把map作为一个简易灵活的数据模型来使用,而且把关键字作为map的key来表示字段。
+(def playlist [{:title "Elephant",:artist "The White Stripes",:year 2003}
+               {:title "Helioself",:artist "Papas Fratas",:year 1997}
+               {:title "Stories from the City,Stories from the Sea",:artist "PJ Harvey",:year 2003}
+               {:title "Buildings and Grounds",:artist "Papas Fratas",:year 2003}
+               {:title "Zen Rodeo",:artist "Marti Gras BB",:year 2003}
+               ])
+;;clojure中的建模通常是从map开始的，尤其是当不确定模型中有哪些字段的时候，map允许你不需要定义一个严格的模型就开始编写代码逻辑。
+;;当使用map时，则map相关的函数就派上用场了，比如查询一下聚合信息：
+(map :title playlist)
+;;类似的，前面介绍的解构可以更简洁的访问map的元素
+(defn summarize [{:keys [title artist year]}]
+  (str title " / " artist " / " year))
+(map summarize playlist)
+
+;;clojure可以轻松的把map升级成一个真正的模型。因此，使用map并不意味着将来换成对象的时候需要大幅修改代码。
+;;只要是面向集合抽象编程，而不是面向集合的具体实现编程，就可以轻松的把一个基于map的模型转换成有defrecord定义的模型，defrecord定义的类型都实现了associative接口。
+
+;;map其他用途
+;;map通常也被用来保存总结信息，索引信息，或者对应关系。
+;;例如，group-by函数可以很方便的根据一个key函数把一个集合分成几组。
+(group-by #(rem % 3) (range 10))
+;={0 [0 3 6 9], 1 [1 4 7], 2 [2 5 8]}
+;;可以看到，它把有相同key值的元素组合到同一组里面去。
+;;给前面的playlist以artist建索引
+(group-by :artist playlist)
+;={"The White Stripes"
+; [{:title "Elephant", :artist "The White Stripes", :year 2003}],
+; "Papas Fratas" [{:title "Helioself", :artist "Papas Fratas", :year 1997} {:title "Buildings and Grounds", :artist "Papas Fratas", :year 2003}],
+; "PJ Harvey" [{:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}],
+; "Marti Gras BB" [{:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}]}
+;;要在两个列上建索引页很简单，使用(group-by (juxt :col1 :col2) data)
+(defn strx
+       [coll1 coll2]
+       (map #(apply (partial str "ad-") %) (for [x coll1 y coll2] [x y])))
+(strx [0 1 2] #{1 2 3})
