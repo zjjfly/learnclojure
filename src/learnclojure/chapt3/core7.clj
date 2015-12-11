@@ -130,7 +130,3 @@
 ; "PJ Harvey" [{:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}],
 ; "Marti Gras BB" [{:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}]}
 ;;要在两个列上建索引页很简单，使用(group-by (juxt :col1 :col2) data)
-(defn strx
-       [coll1 coll2]
-       (map #(apply (partial str "ad-") %) (for [x coll1 y coll2] [x y])))
-(strx [0 1 2] #{1 2 3})
