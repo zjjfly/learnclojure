@@ -63,7 +63,7 @@
 ;;下面的式子会报错，因为set中不能有重复的
 ;#{1 2 3 3}
 ;;hash-set能创建任意数量元素的无序set
-(hash-set 1 2 4 5 )
+(hash-set 1 2 4 5)
 ;;可以用set函数把其他类型的集合转成set
 (set [1 3 4 5 1])
 ;= #{1 4 3 5}
@@ -99,11 +99,11 @@
 ;=(1 2 3)
 ;;map作为临时struct
 ;;因为map里面的值可以是任意的类型，所有经常把map作为一个简易灵活的数据模型来使用,而且把关键字作为map的key来表示字段。
-(def playlist [{:title "Elephant",:artist "The White Stripes",:year 2003}
-               {:title "Helioself",:artist "Papas Fratas",:year 1997}
-               {:title "Stories from the City,Stories from the Sea",:artist "PJ Harvey",:year 2003}
-               {:title "Buildings and Grounds",:artist "Papas Fratas",:year 2003}
-               {:title "Zen Rodeo",:artist "Marti Gras BB",:year 2003}
+(def playlist [{:title "Elephant", :artist "The White Stripes", :year 2003}
+               {:title "Helioself", :artist "Papas Fratas", :year 1997}
+               {:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}
+               {:title "Buildings and Grounds", :artist "Papas Fratas", :year 2003}
+               {:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}
                ])
 ;;clojure中的建模通常是从map开始的，尤其是当不确定模型中有哪些字段的时候，map允许你不需要定义一个严格的模型就开始编写代码逻辑。
 ;;当使用map时，则map相关的函数就派上用场了，比如查询一下聚合信息：
@@ -130,3 +130,4 @@
 ; "PJ Harvey" [{:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}],
 ; "Marti Gras BB" [{:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}]}
 ;;要在两个列上建索引页很简单，使用(group-by (juxt :col1 :col2) data)
+
