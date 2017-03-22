@@ -7,6 +7,5 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 *.iml
-/.idea/replstate.xml
-/.idea/workspace.xml
+/.idea
 /learnclojure.iml

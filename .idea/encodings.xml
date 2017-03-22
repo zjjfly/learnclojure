@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/LICENSE" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/project.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core1.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core2.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core3.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core4.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core5.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core6.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt1/core7.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt2/StatefulInteger.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/learnclojure/chapt2/core2.clj" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/test/learnclojure/core_test.clj" charset="UTF-8" />
+  <component name="Encoding">
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
