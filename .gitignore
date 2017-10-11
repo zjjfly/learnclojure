@@ -8,4 +8,3 @@ pom.xml.asc
 /.nrepl-port
 *.iml
 /.idea
-/learnclojure.iml
