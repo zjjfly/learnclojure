@@ -1,4 +1,4 @@
-(ns learnclojure.charpt1.core1
+(ns learnclojure.chapt1.core1
   (:gen-class))
 ;;求平均值的函数
 (defn average
