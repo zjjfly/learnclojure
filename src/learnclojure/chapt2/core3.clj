@@ -2,7 +2,7 @@
   (:import (java.util Date)
            (java.io StringWriter))
   (:require [clojure.xml :as xml]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as jio]))
 ;;高阶函数
 ;;一个返回摸个给定数字与它的参数的和的函数
 (defn adder
@@ -37,7 +37,7 @@
 ;;with-open保证f在with-open结束的时候被关闭，append=true表示file以追加模式打开
 (defn file-logger
   [file]
-  #(with-open [f (io/writer file :append true)]
+  #(with-open [f (jio/writer file :append true)]
      ((print-logger f) %)))
 (def log->file (file-logger "message.log"))
 (log->file "qeqe")
