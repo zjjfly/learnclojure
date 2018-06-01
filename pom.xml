@@ -16,7 +16,7 @@
   <scm>
     <connection>scm:git:git://github.com/zjjfly/learnclojure.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/zjjfly/learnclojure.git</developerConnection>
-    <tag>81f900b50bb4925a98f79e1ad85dd1403b30845b
+    <tag>ea36376af30f7be83f359fb0bca471276a0176b8
 </tag>
     <url>https://github.com/zjjfly/learnclojure</url>
   </scm>
@@ -35,7 +35,16 @@
     </testResources>
     <directory>target</directory>
     <outputDirectory>target/classes</outputDirectory>
-    <plugins/>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
   <repositories>
     <repository>
@@ -59,11 +68,14 @@
       </releases>
     </repository>
   </repositories>
+  <dependencyManagement>
+    <dependencies/>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
-      <version>1.7.0</version>
+      <version>1.8.0</version>
     </dependency>
   </dependencies>
 </project>

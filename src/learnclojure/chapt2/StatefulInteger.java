@@ -1,7 +1,5 @@
 package learnclojure.chapt2;
 
-import clojure.lang.Numbers;
-
 /**
  * Created by jjzi on 2015/9/30.
  */
@@ -9,10 +7,12 @@ public class StatefulInteger extends Number {
 
     private int state;
 
+    @Override
     public boolean equals(Object o) {
         return o instanceof StatefulInteger && state == ((StatefulInteger) o).state;
     }
 
+    @Override
     public int hashCode() {
         return state;
     }
@@ -21,6 +21,7 @@ public class StatefulInteger extends Number {
         this.state = initState;
     }
 
+    @Override
     public int intValue() {
         return state;
     }

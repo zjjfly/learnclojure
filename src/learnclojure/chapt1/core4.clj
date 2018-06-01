@@ -9,13 +9,14 @@
         :d {:e 10 :f 11}
         "foo" 88
         42 false})
+;;map解构的语法是{ 要绑定的变量1 对应的keyword1 要绑定的变量2 对应的keyword2 ....}.其中的keyword可以是任何类型的值
 (let [{a :a b :b } m]
   (+ a b))
 (let [{f "foo"} m]
   (+ f 12))
 (let [{v 42} m]
   (if v 1 0))
-;;如果进行map解构的是get所支持的对象，则解构的key是数字类型的数组下标
+;;如果进行map解构的是vector,数组,字符串，则解构的key是数字类型的数组下标,这对于需要取它们之间某些值的时候很方便,你可以一次性取出,而不用像java一样一个个取
 (let [{x 3 y 8} [12 0 0 -18 44 6 0 0 1]]
   (+ x y))
 (let [{{e :e} :d} m]
@@ -36,15 +37,14 @@
        :or {k 50}} m]
   (+ k x))
 ;;:or可以区分有没有赋值还是赋的是nil或false
-(let [{opt1 :option} {:option false}
-      opt1 (or opt1 true)
+(let [{opt1 :option :or {opt1 true}} {:option false}
       {opt2 :option :or {opt2 true}} {:option false}]
       {:opt1 opt1,:opt2 opt2})
-;;绑定符号到map中同名关键字所对应的值，如果按之前的写法会很冗长，不符合clojure简洁的原则
+;;绑定符号到map中同名关键字所对应的值，如果按上面的写法会很冗长，不符合clojure简洁的原则
 ;;所以，clojure提供了:keys、:strs、:syms
 ;;其中:keys比其他两个用的多的多
 (def zjj {:name "zjj" :age 25 :location "Suzhou"} )
-(let [{:keys [name age location]} chas]
+(let [{:keys [name age location]} zjj]
   (format "%s is %s years old and lives in %s" name age location))
 (def shi {"name" "shi" "age" 12 "location" "ShangHai"} )
 (let [{:strs [name age location]} shi]
@@ -52,6 +52,7 @@
 (def yang {'name "yang" 'age 54 'location "BeiJing"})
 (let [{:syms [name age location]} yang]
   (format "%s is %s years old and lives in %s" name age location))
+;;可以对剩余部分进行解构
 (def user-info ["robot" 2011 :name "Bob" :city "Boston"])
 (let [[username year & {:keys [name city]}]  user-info]
   (format "%s is in %s " name city))
