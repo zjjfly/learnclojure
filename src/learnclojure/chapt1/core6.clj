@@ -20,6 +20,9 @@
 (fn [x & rest]
   (- x (apply + rest)))
 #(- % (apply + %&))
+;;%&会根据你根据实际已经使用了的参数个数计算剩下的参数
+(#(+ %1 %2 (apply * %&))
+  1 2 3 4)
 ;; 函数字面量不能嵌套
 ;;#(#(+ % %)) 运行出错
 
@@ -36,7 +39,7 @@
 (true? "ad")
 (if "ad" \t \f)
 ;;逻辑上的true和下面的式子等价
-(def logic-true #(and  (not  (nil? %)) (not (false? %))))
+(def logic-true #(and (not (nil? %)) (not (false? %))))
 (logic-true "da")
 
 ;;循环：loop和recur
@@ -48,7 +51,7 @@
   (if (neg? x)
     x
     (recur (- x 4))))
-;;函数也可以建立loop头
+;;函数也可以建立loop头,这样的话其实就是一个递归函数
 (defn countdown
   "hehe"
   [x]
@@ -60,5 +63,3 @@
 ;;recur 是非常底层的循环和递归控制操作，通常不用，但它不消耗堆栈空间，对于实现某些递归算法很关键
 ;;并且它不对数字装箱，所以对于实现一些对于数学和数据有关的操作很有用
 ;;还有一些情况需要累计或者消费一个或多个集合，这也会用到recur
-
-

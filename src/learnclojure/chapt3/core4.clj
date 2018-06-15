@@ -9,7 +9,7 @@
 ;;4.contains？ 是一个谓词，集合中包含指定key的时候返回true，否则返回false
 
 ;;最正宗的关系型数据结构是map，它也是clojure提供的最有用的数据结构
-(def m {:a 1,:b,2,:c 3})
+(def m {:a 1, :b, 2, :c 3})
 (get m :a)
 (get m :d)
 (get m :d "not found")
@@ -55,7 +55,7 @@
 ;;初学者会用contains？检测vector中是否含有指定的值，这是不对的.contains？检测是集合中是否包含某个key
 ;;检测集合中是否包含某个值用some
 
-;;get和contains？非常同意，可以高效的操作vector,map,set,java里的map，字符串以及java数组
+;;get和contains？非常通用，可以高效的操作vector,map,set,java里的map，字符串以及java数组
 (get "clojure" 3)
 (contains? (HashMap.) 1)
 (get (into-array [1 2 3]) 0)
@@ -64,7 +64,7 @@
 ;;如果集合中不包含某个key，调用的时候也没有设置默认值,那么会返回nil、但这个key对于的值也可能是nil
 (get {:ethl nil} :ethl)
 ;;那么怎么知道是没有这个key还是这个key的值是nil呢？
-;;我们可以使用find，它返回的是键值对如果map里包含指定的key的话，返回nil如果不包含这个key
+;;我们可以使用find,如果map里包含指定的key的话,它返回的是键值对;如果不包含这个key,则返回nil
 (find {:ethl nil} :ethl)
 (find {:ethl nil} :r)
 ;;find也很容易和解构形式if-let，when-let一起用

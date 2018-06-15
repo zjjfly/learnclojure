@@ -1,5 +1,6 @@
 (ns learnclojure.chapt2.core1
-  (:import (learnclojure.chapt2 StatefulInteger)))
+  (:import (learnclojure.chapt2 StatefulInteger))
+  (:require [clojure.string :as string]))
 ;;函数式编程的特点：
 ;;1.喜欢操作不可变值
 ;;2.喜欢对数据进行声明式的处理
@@ -29,7 +30,7 @@
 (print-number six)
 (= five six)
 (= six (StatefulInteger. 42))
-;;在不可变对象很少被使用的语言中，丢你一个简单的问题，比如把集合作为map的key实现起来很困难
+;;在不可变对象很少被使用的语言中,对于一个简单的问题,比如把集合作为map的key实现起来很困难
 ;;而clojure不用担心这种问题，因为clojure提供的数据结构都是不可变和高效的
 (def h {[1 2] 4})
 (h [1 2])
@@ -53,7 +54,7 @@ h
 ;;map是其中最常用的,它接收一个函数，一个或多个集合作为参数，返回一个序列
 ;;(map f [x y z])和[(f x) (f y) (f z)]等价
 ;; (map f [x y z] [a b c])和[(f x a) (f y b) (f z c)]等价
-(map clojure.string/lower-case ["Java" "Scala" "Clojure"])
+(map string/lower-case ["Java" "Scala" "Clojure"])
 (map * [1 3 5] [2 4 6])
 ;;有时候需要把一个集合合并成一个值，如求一个数组的最大值，要用到clojure的reduce函数。
 ;;我们把向一个集合应用一个函数产生单个值的过程叫归约，reduce就是用来归约的

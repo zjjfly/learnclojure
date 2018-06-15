@@ -53,7 +53,7 @@ Integer/MAX_VALUE
 (eval :foo)
 (eval [1 2 3])
 (eval "ad")
-(eval '(learnclojure.charpt1.core1/average [60 80 100 400]))
+(eval '(learnclojure.chapt1.core1/average [60 80 100 400]))
 
 ;;现在可以自己实现一个clojure的repl了
 ;;用read-string读取字符串，用eval执行表达式

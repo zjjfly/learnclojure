@@ -1,10 +1,11 @@
-(ns learnclojure.chapt2.core2)
+(ns learnclojure.chapt2.core2
+  (:require [clojure.string :as str]))
 ;;偏函数vs函数字面量
 ;;函数字面量提供了偏函数功能的超集，可以通过函数字面量实现类似偏函数的功能
 (#(filter string? %) [1 "D" 2 "T"])
 (#(filter % [1 "D" 2 "T"]) string?)
 (#(filter % [1 "D" 2 "T"]) number?)
-;;函数字面量要求制定函数的所有参数，但偏函数不用
+;;函数字面量要求指定函数的所有参数，但偏函数不用
 ;;错误代码：(#(map *) [1 3 5] [2 4 6] [8 9 0])，没有指定参数
 (#(map * % %2 %3) [1 3 5] [2 4 6] [8 9 7])
 ;;错误代码：(#(map * % %2 %3) [1 3 5] [8 9 7])，传入的参数和制定的参数个数不符
@@ -34,7 +35,6 @@
 ;;comp的作用不仅仅是写hello world这样的小玩意
 ;;例子：把CamelCase式的字符串转成clojure中以横线分隔的小写单词
 ;;interpose函数把序列的元素用指定的字符分隔,keyword函数把字符串变为关键字
-(require '[clojure.string :as str])
 (def camel->keyword1 (comp keyword
                           str/join
                           (partial interpose "-")

@@ -21,12 +21,14 @@
 ;;这一点使得我们可以传入一个或多个值以及一个惰性序列来创建一个更大的惰性序列
 ;;random-ints实现的很差，一般不这么写，更好的写法是：
 (repeatedly 10 (partial rand-int 10))
+(take 10 (iterate inc 1))
 ;;只包含一个参数的repeatedly会返回一个有无限元素的惰性序列，clojure中处理无限长度的序列很平常
 ;;clojure标准库和社区的一些库有很多透明处理惰性序列的函数，而且所有这些核心的序列处理函数都返回惰性序列
 ;;比如：map、for、filter、take、drop以及由它们引申出来的一些函数（take-nth、remove、drop-while等）
 ;;有了这些工具我们可以把许多问题归结为对一个序列的值的处理
 
-;;如果序列中每个元素的实例化需要一些io操作或者计算量很大，那么要非常小心的处理。这也是rest和next很大的一个区别所在。
+;;如果序列中每个元素的实例化需要一些io操作或者计算量很大，那么要非常小心的处理
+;;因为next会实例化序列的第一个和序列的tail的第一个元素.这也是rest和next很大的一个区别所在。
 (def x (next (random-ints 10)))
 ;;next实例化两次
 (def x (rest (random-ints 10)))
@@ -48,12 +50,15 @@
 ;;clojure用惰性序列的目的是可以透明的处理无法放入内存的大数据
 ;;使得处理大数据、小数据可以用统一的声明，可以用管道的方式表达处理算法
 ;;这种情况下序列可以看做是计算的中间载体而不是集合
+;;上面的说法让我感觉和Java8的Stream很类似,Stream也是惰性计算的.两者的出发点应该是一样的
 
 ;;会经常在clojure中看到这样的用法：给定一个或多个数据源，从数据源抽出一个序列，处理这个
 ;;序列，返回一个更加合适的数据结构，例子：
 (apply str (remove (set "aeiouy")
                    ;;下面这个字符串会隐式的转化成一个字符序列
                    "vowels are useless!or maybe not..."))
+;;set在clojure中可以当成是一个predicate,这个和Scala是一样的
+(filter (set [1 2 3]) [2 3 4])
 
 ;;只要保持了对序列的一个引用，那么序列中的元素不能被垃圾回收，这就是“头保持”
 ;;如果序列很大，容易发生内存溢出问题
@@ -61,10 +66,10 @@
 (split-with neg? [-2 -1 0 1 2])
 ;;下面这段代码就有头保持问题
 ;(let [[t d] (split-with #(< % 4) (range 1e8))]
-  ;[(count d) (count t)])
+;[(count d) (count t)])
 ;;把部分代码交换一下就不会出问题
 (let [[t d] (split-with #(< % 4) (range 1e8))]
-[(count t) (count d)])
+  [(count t) (count d)])
 ;;原因是由于编译器发现序列的前四个元素还会被使用，所有没有回收这些元素，导致整个惰性序列都实例化了但没有被回收
 ;;所有会占用非常多内存
 ;;参考资料：http://xumingming.sinaapp.com/977/clojure-lazyseq-head-retention/

@@ -18,7 +18,7 @@
 #{{:first-name "zi" :last-name "junjie"}
   {:first-name "Chen" :last-name "jiali"}}
 ;;clojure数据结构有两个特色
-;;1.是根据抽象来使用的，而不是具体的实现细节
+;;1.是根据抽象来使用的，而不是 具体的实现细节
 ;;2.数据结构是不可改变和持久的
 
 ;;抽象由于实现
