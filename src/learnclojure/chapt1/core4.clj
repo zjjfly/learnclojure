@@ -10,7 +10,7 @@
         "foo" 88
         42 false})
 ;;map解构的语法是{ 要绑定的变量1 对应的keyword1 要绑定的变量2 对应的keyword2 ....}.其中的keyword可以是任何类型的值
-(let [{a :a b :b } m]
+(let [{a :a b :b} m]
   (+ a b))
 (let [{f "foo"} m]
   (+ f 12))
@@ -22,10 +22,10 @@
 (let [{{e :e} :d} m]
   (* e 2))
 ;;可以把顺序解构和map解构结合起来
-(let [{[x y z ] :c} m]
+(let [{[x y z] :c} m]
   (+ x y z))
 (def map-in-vector ["James" {:birthday (Date. 73 1 4)}])
-(let [[ name {day :birthday}] map-in-vector]
+(let [[name {day :birthday}] map-in-vector]
   (str name " is borned on " day))
 ;;map解构的额外特性
 ;;和顺序解构一样，可以用:as保持被解构的值
@@ -39,14 +39,14 @@
 ;;:or可以区分有没有赋值还是赋的是nil或false
 (let [{opt1 :option :or {opt1 true}} {:option false}
       {opt2 :option :or {opt2 true}} {:option false}]
-      {:opt1 opt1,:opt2 opt2})
+  {:opt1 opt1,:opt2 opt2})
 ;;绑定符号到map中同名关键字所对应的值，如果按上面的写法会很冗长，不符合clojure简洁的原则
 ;;所以，clojure提供了:keys、:strs、:syms
 ;;其中:keys比其他两个用的多的多
-(def zjj {:name "zjj" :age 25 :location "Suzhou"} )
+(def zjj {:name "zjj" :age 25 :location "Suzhou"})
 (let [{:keys [name age location]} zjj]
   (format "%s is %s years old and lives in %s" name age location))
-(def shi {"name" "shi" "age" 12 "location" "ShangHai"} )
+(def shi {"name" "shi" "age" 12 "location" "ShangHai"})
 (let [{:strs [name age location]} shi]
   (format "%s is %s years old and lives in %s" name age location))
 (def yang {'name "yang" 'age 54 'location "BeiJing"})

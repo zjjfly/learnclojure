@@ -17,9 +17,9 @@
 (dissoc m :b)
 ;;assoc和dissoc还可以增加和删除多个键值对
 (assoc m
-  :x 4
-  :y 5
-  :z 6)
+       :x 4
+       :y 5
+       :z 6)
 (dissoc m :a :c)
 
 ;;虽然这些函数通常用来操作map，但get和assoc也可以用来操作vector
@@ -30,9 +30,9 @@
 (get v 10 "not found!")
 ;;assoc可以更新数组中某个下标对应的值
 (assoc v
-  1 4
-  0 -12
-  2 :p)
+       1 4
+       0 -12
+       2 :p)
 ;;可以用assoc实现和conj一样的效果，把一个值添加到vector最后，但需要显式的告诉vector新的下标
 (assoc v 3 "ddd")
 ;;get还能操作set，如果一个key在set中存在，会返回它
@@ -75,6 +75,5 @@
   (format "found %s=>%s" k v)
   "not found")
 ;;当被用在条件判断中的时候，false在关系型集合中和nil有同样的问题，解决方法和nil一样
-
 
 

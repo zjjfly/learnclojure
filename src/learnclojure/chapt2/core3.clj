@@ -96,8 +96,8 @@
 
 ;;core.memoize例子
 (def id (clojure.core.memoize/lu
-          #(do (Thread/sleep 5000) (identity %))
-          :lu/threshold 3))
+         #(do (Thread/sleep 5000) (identity %))
+         :lu/threshold 3))
 ;第一次会等待五秒钟,再次调用直接返回
 (id 42)
 (id 42)

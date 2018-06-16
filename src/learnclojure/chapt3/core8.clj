@@ -23,8 +23,7 @@
    {:product "Shells", :customer "Elmer Fudd", :qty 4, :total 100}
    {:product "Hole", :customer "Wile Coyote", :qty 1, :total 1000}
    {:product "Anvil", :customer "Elmer Fudd", :qty 2, :total 300}
-   {:product "Anvil", :customer "Wile Coyote", :qty 6, :total 900}
-   ])
+   {:product "Anvil", :customer "Wile Coyote", :qty 6, :total 900}])
 ;;利用reduce-by,可以很方便的算出每个人的订单总金额
 (reduce-by :customer #(+ %1 (:total %2)) 0 orders)
 ;;计算每件商品的销量

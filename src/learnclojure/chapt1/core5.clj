@@ -12,7 +12,7 @@
 ;;多个参数的函数
 ((fn [x y z]
    (+ x y z))
-  3 4 12)
+ 3 4 12)
 ;;等价于
 (let [x 3 y 4 z 12]
   (+ x y z))
@@ -28,9 +28,9 @@
 (strange-adder 1 2)
 ;;letfn可以定义同时定义多个具名函数，并且这些函数可以互相引用
 (letfn [(odd? [n]
-              (if (zero? n)
-                false
-                (even? (dec n))))
+          (if (zero? n)
+            false
+            (even? (dec n))))
         (even? [n]
                (or (zero? n)
                    (odd? (dec n))))]
@@ -57,8 +57,7 @@
    :join-date join-date
    :email     email
    ;;2.592e9 -> one month in ms
-   :exp-date  (Date. (long (+ 2.592e9 (.getTime join-date))))
-   })
+   :exp-date  (Date. (long (+ 2.592e9 (.getTime join-date))))})
 (make-user2 "Zijunjie")
 (make-user2 "Zijunjie"
             :join-date (Date. 111 0 1)

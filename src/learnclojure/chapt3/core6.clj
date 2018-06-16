@@ -23,7 +23,7 @@
 (get {:a 5 :b 6} :c 7)
 (get #{:a :b :c} :d)
 ;;和下面的这些更简洁的表达式是等价的
-(:b {:a 5 :b 6} )
+(:b {:a 5 :b 6})
 (:c {:a 5 :b 6} 7)
 (:d #{:a :b :c})
 ;;因为这个值在函数位置上，所以数字下标是不能用的，因此vector的查找不能用这种方式
@@ -58,12 +58,12 @@
 ;;一种更通用的方法是使用filter，它返回一个惰性序列，内容是满足给定谓词的元素
 ;;同样，可以直接把集合或者关键字或者符号作为谓词使用
 (filter :age [{:age 21 :name "David"}
-            {:gender :f :name "Suzanne"}
-            {:name "Sara" :location "NYC"}])
+              {:gender :f :name "Suzanne"}
+              {:name "Sara" :location "NYC"}])
 ;=({:age 21, :name "David"})
 (filter (comp (partial <= 25) :age)  [{:age 21 :name "David"}
-             {:gender :f :name "Suzanne" :age 20}
-             {:name "Sara" :location "NYC" :age 34}])
+                                      {:gender :f :name "Suzanne" :age 20}
+                                      {:name "Sara" :location "NYC" :age 34}])
 ;=({:name "Sara", :location "NYC", :age 34})
 
 ;;remove作用和filter相反，它把符合谓词的元素从集合中去除掉，返回所有不符合谓词要求的元素。相当于(filter (complement f) collection)

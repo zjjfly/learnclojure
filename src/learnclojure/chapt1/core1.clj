@@ -20,19 +20,18 @@ zjj"
 ;;octal编码
 \o41
 ;;特殊字符常量
-(println (str "空格:" \space ".") )
-(println (str "新行:" \newline ".") )
-(println (str "换页符:" \formfeed ".") )
-(println (str "回车:" \return ".") )
-(println (str "退格:" \backspace ".") )
-(println (str "tab:" \tab ".") )
+(println (str "空格:" \space "."))
+(println (str "新行:" \newline "."))
+(println (str "换页符:" \formfeed "."))
+(println (str "回车:" \return "."))
+(println (str "退格:" \backspace "."))
+(println (str "tab:" \tab "."))
 ;;关键字
 ;;初始化一个map
 (def person {:name "zjj"
              :city "suzhou"
              ;;“::”表示是当前命名空间的关键字
-             ::age 12
-             })
+             ::age 12})
 ;;访问map的city对应的值
 (person :city)
 (:city person)

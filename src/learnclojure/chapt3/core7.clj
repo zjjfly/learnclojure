@@ -6,7 +6,7 @@
 ;;一般都是用来做函数调用的，用来存储数据的场景不多，这和其他lisp方言不同，因为clojure使用更丰富的数据解构，如map，set，vector和序列。
 ;;序列在很大程度上跟list是相似的，这使得我们几乎在代码里不会直接用到list
 
-;clojure的list是单向链表，所以只对链头支持高效的访问和修改(conj，pop，rest等函数)，由于是链表，所以不支持高效的随机访问。
+;;clojure的list是单向链表，所以只对链头支持高效的访问和修改(conj，pop，rest等函数)，由于是链表，所以不支持高效的随机访问。
 ;;它也不支持get，因为它的性能达不到get亚线性的要求。
 
 ;;列表是自身的序列，所以调用seq始终返回列表本身
@@ -103,8 +103,7 @@
                {:title "Helioself", :artist "Papas Fratas", :year 1997}
                {:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}
                {:title "Buildings and Grounds", :artist "Papas Fratas", :year 2003}
-               {:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}
-               ])
+               {:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}])
 ;;clojure中的建模通常是从map开始的，尤其是当不确定模型中有哪些字段的时候，map允许你不需要定义一个严格的模型就开始编写代码逻辑。
 ;;当使用map时，则map相关的函数就派上用场了，比如查询一下聚合信息：
 (map :title playlist)
@@ -120,14 +119,13 @@
 ;;map通常也被用来保存总结信息，索引信息，或者对应关系。
 ;;例如，group-by函数可以很方便的根据一个key函数把一个集合分成几组。
 (group-by #(rem % 3) (range 10))
-;={0 [0 3 6 9], 1 [1 4 7], 2 [2 5 8]}
+;;={0 [0 3 6 9], 1 [1 4 7], 2 [2 5 8]}
 ;;可以看到，它把有相同key值的元素组合到同一组里面去。
 ;;给前面的playlist以artist建索引
 (group-by :artist playlist)
-;={"The White Stripes"
-; [{:title "Elephant", :artist "The White Stripes", :year 2003}],
-; "Papas Fratas" [{:title "Helioself", :artist "Papas Fratas", :year 1997} {:title "Buildings and Grounds", :artist "Papas Fratas", :year 2003}],
-; "PJ Harvey" [{:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}],
-; "Marti Gras BB" [{:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}]}
-;;要在两个列上建索引页很简单，使用(group-by (juxt :col1 :col2) data)
-
+;;={"The White Stripes"
+;; [{:title "Elephant", :artist "The White Stripes", :year 2003}],
+;; "Papas Fratas" [{:title "Helioself", :artist "Papas Fratas", :year 1997} {:title "Buildings and Grounds", :artist "Papas Fratas", :year 2003}],
+;; "PJ Harvey" [{:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}],
+;; "Marti Gras BB" [{:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}]}
+;; 要在两个列上建索引页很简单，使用(group-by (juxt :col1 :col2) data)

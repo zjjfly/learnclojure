@@ -6,9 +6,9 @@
 (defn random-ints
   [limit]
   (lazy-seq
-    (println "realizing random int")
-    (cons (rand-int limit)
-          (random-ints limit))))
+   (println "realizing random int")
+   (cons (rand-int limit)
+         (random-ints limit))))
 ;;定义一个惰性序列，但不会实例化
 (def rands (take 10 (random-ints 10)))
 ;;求第一个元素，使我们定义lazy-seq时传入的表达式被调用一次，得到一个随机数，并打印一次信息

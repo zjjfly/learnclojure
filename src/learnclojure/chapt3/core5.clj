@@ -52,12 +52,12 @@
 ;从set中删除一个元素用disj
 (disj #{1 2 4} 1 2)
 ;clojure.set提供了一些有用的函数，如subset?、superset?、union、intersection、project等
-(cset/subset? #{1 2 } #{1 2 3})
-(cset/superset? #{1 2 } #{1 2 3})
+(cset/subset? #{1 2} #{1 2 3})
+(cset/superset? #{1 2} #{1 2 3})
 ;合集
-(cset/union #{1 2 } #{1 2 3})
+(cset/union #{1 2} #{1 2 3})
 ;交集
-(cset/intersection #{1 2 } #{1 2 3})
+(cset/intersection #{1 2} #{1 2 3})
 (cset/project #{{:a 2 :b 3 :c 4} {:a 1 :b 2}}  [:a :b])
 
 ;sorted 有序集合

@@ -15,8 +15,8 @@
   [sequential]
   (into (empty sequential)
         (interleave
-          (take-nth 2 (drop 1 sequential))
-          (take-nth 2 sequential))))
+         (take-nth 2 (drop 1 sequential))
+         (take-nth 2 sequential))))
 ;;take-nth返回一个包含传入的集合的第0个元素，第n个元素，第2n个元素....的lazy seq
 (take-nth 2 (range 10))
 ;;=(0 2 4 6 8)
@@ -30,7 +30,7 @@
   [f m]
   (into (empty m)
         (for [[k v] m]
-        [k (f v)])))
+          [k (f v)])))
 (map-map inc (hash-map :a 3 :b 5))
 ;={:b 6, :a 4}
 (map-map inc (sorted-map :a 3 :b 5))
@@ -97,8 +97,7 @@
 
 ;;序列不是迭代器，
 (doseq [x (range 3)]
-  (println x)
-  )
+  (println x))
 ;;下面的rst和r是两个不同的seq，它们不会影响彼此
 (let [r (range 3)
       rst (rest r)]

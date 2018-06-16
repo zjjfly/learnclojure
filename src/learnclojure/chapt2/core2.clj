@@ -36,10 +36,10 @@
 ;;例子：把CamelCase式的字符串转成clojure中以横线分隔的小写单词
 ;;interpose函数把序列的元素用指定的字符分隔,keyword函数把字符串变为关键字
 (def camel->keyword1 (comp keyword
-                          str/join
-                          (partial interpose "-")
-                          (partial map str/lower-case)
-                          #(str/split % #"(?<=[a-z])(?=[A-Z])")))
+                           str/join
+                           (partial interpose "-")
+                           (partial map str/lower-case)
+                           #(str/split % #"(?<=[a-z])(?=[A-Z])")))
 (camel->keyword1 "NotBad")
 ;;可以使用->和->>宏实现类似的comp的功能
 ;;传给这些宏的第一个参数会作为后面函数的第一个(->)或最后一个参数(->>),依次类推
