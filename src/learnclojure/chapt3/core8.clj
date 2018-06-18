@@ -70,3 +70,4 @@
 ;;由flat-breakup提供的序列的每一个值被当做map的一个元素(entry)
 ;;比如[["Wile Coyote" "Anvil"] 900],当reduce调用apply对map的每一个元素进行处理的时候,对每个元素调用的函数其实是assoc-in.
 ;;比如(assoc-in {} ["Wile Coyote" "Anvil"] 900),我们使用["Wile Coyote" "Anvil"]来定义map的key,900来定义它的值
+(update {} :a + 1)

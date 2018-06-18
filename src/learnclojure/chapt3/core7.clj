@@ -128,4 +128,5 @@
 ;; "Papas Fratas" [{:title "Helioself", :artist "Papas Fratas", :year 1997} {:title "Buildings and Grounds", :artist "Papas Fratas", :year 2003}],
 ;; "PJ Harvey" [{:title "Stories from the City,Stories from the Sea", :artist "PJ Harvey", :year 2003}],
 ;; "Marti Gras BB" [{:title "Zen Rodeo", :artist "Marti Gras BB", :year 2003}]}
-;; 要在两个列上建索引页很简单，使用(group-by (juxt :col1 :col2) data)
+;; 要在两个列上建索引页很简单:
+(group-by (juxt :artist :year) playlist)
