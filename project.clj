@@ -7,5 +7,6 @@
                  [korma "0.4.0"]
                  [mysql/mysql-connector-java "5.1.42"]
                  [org.clojure/core.memoize "0.7.1"]
+                 [enlive "1.1.6"]
                  ]
   :plugins [[lein-cljfmt "0.5.7"]])
