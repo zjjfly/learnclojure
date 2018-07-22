@@ -102,6 +102,7 @@ a
   [^Writer w & content]
   (doseq [x (interpose " " content)]
     (.write w (str x)))
+  ;;doto的返回值的是第一个参数,所以在这里比较合适
   (doto w
     (.write "\n")
     (.flush)))
@@ -126,24 +127,24 @@ a
 (defn attack
   [aggressor target]
   (dosync
-    (let [damage (* (rand 0.1) (:strength @aggressor) (ensure rpg/daylight))]
-      (send-off console write
-                (:name @aggressor) "hit" (:name @target) "for" damage)
-      (commute target update-in [:health] #(max 0 (- % damage))))))
+   (let [damage (* (rand 0.1) (:strength @aggressor) (ensure rpg/daylight))]
+     (send-off console write
+               (:name @aggressor) "hit" (:name @target) "for" damage)
+     (commute target update-in [:health] #(max 0 (- % damage))))))
 (defn heal
   [healer target]
   (dosync
-    (let [aid (min (* (rand 0.1) (:mana @healer))
-                   (- (:max-health @target) (:health @target)))]
-      (when (and (pos? aid) (pos? (:mana @healer)))
-        (send-off console write
-                  (:name @healer) "heals" (:name @target) "for" aid)
-        (commute healer update :mana - (max 5 (/ aid 5)))
-        (alter target update :health + aid)))))
+   (let [aid (min (* (rand 0.1) (:mana @healer))
+                  (- (:max-health @target) (:health @target)))]
+     (when (and (pos? aid) (pos? (:mana @healer)))
+       (send-off console write
+                 (:name @healer) "heals" (:name @target) "for" aid)
+       (commute healer update :mana - (max 5 (/ aid 5)))
+       (alter target update :health + aid)))))
 (dosync
-  (alter bilbo assoc :health 100)
-  (alter smaug assoc :health 500)
-  (alter gandalf assoc :mana 750))
+ (alter bilbo assoc :health 100)
+ (alter smaug assoc :health 500)
+ (alter gandalf assoc :mana 750))
 
 (common/wait-futures 1
                      (rpg/play smaug attack bilbo)

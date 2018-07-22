@@ -16,7 +16,7 @@
 ;;使用pmap来并行化获取文件的电话号码操作
 (time (dorun (pmap phone-number files)))
 (future (phone-number (concat (repeat 100000 \space)
-                 "Sunil:717.555.2311,Betty:241.120.2313")))
+                              "Sunil:717.555.2311,Betty:241.120.2313")))
 ;;注意,pmap会有一些额外的开销,只适用于耗时的CPU密集型计算,对于耗时很短的操作,效率可能反而没有mapgao
 
 ;;把任务数量增多但单个任务的耗时变小

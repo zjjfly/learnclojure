@@ -4,9 +4,9 @@
 (defn attack
   [aggressor target]
   (dosync
-    (let [damage (* (rand 0.1) (:strength @aggressor) (ensure daylight))]
-      (println damage "," @daylight)
-      (commute target update-in [:health] #(max 0 (- % damage))))))
+   (let [damage (* (rand 0.1) (:strength @aggressor) (ensure daylight))]
+     (println damage "," @daylight)
+     (commute target update-in [:health] #(max 0 (- % damage))))))
 (defn enforce-max-health
   [{:keys [name max-health]}]
   (fn [character-data]
@@ -15,11 +15,11 @@
 (defn heal
   [healer target]
   (dosync
-    (let [aid (min (* (rand 0.1) (:mana @healer))
-                   (- (:max-health @target) (:health @target)))]
-      (when (and (pos? aid) (pos? (:mana @healer)))
-        (commute healer update :mana - (max 5 (/ aid 5)))
-        (alter target update :health + aid)))))
+   (let [aid (min (* (rand 0.1) (:mana @healer))
+                  (- (:max-health @target) (:health @target)))]
+     (when (and (pos? aid) (pos? (:mana @healer)))
+       (commute healer update :mana - (max 5 (/ aid 5)))
+       (alter target update :health + aid)))))
 (defn character
   [name & {:as opts}]
   (let [cdata (merge {:name name :items #{} :health 500} opts)

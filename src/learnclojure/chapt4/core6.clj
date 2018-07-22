@@ -13,10 +13,10 @@
 (defn heal
   [healer target]
   (dosync
-    (let [aid (* (rand 0.1) (:mana @healer))]
-      (when (and (pos? aid) (pos? (:mana @healer)))
-        (commute healer update :mana - (max 5 (/ aid 5)))
-        (commute target update :health + aid)))))
+   (let [aid (* (rand 0.1) (:mana @healer))]
+     (when (and (pos? aid) (pos? (:mana @healer)))
+       (commute healer update :mana - (max 5 (/ aid 5)))
+       (commute target update :health + aid)))))
 (defn character
   [name & {:as opts}]
   (let [cdata (merge {:name name :items #{} :health 500} opts)
@@ -35,11 +35,11 @@
 (defn heal
   [healer target]
   (dosync
-    (let [aid (min (* (rand 0.1) (:mana @healer))
-                   (- (:max-health @target) (:health @target)))]
-      (when (and (pos? aid) (pos? (:mana @healer)))
-        (commute healer update :mana - (max 5 (/ aid 5)))
-        (alter target update :health + aid)))))
+   (let [aid (min (* (rand 0.1) (:mana @healer))
+                  (- (:max-health @target) (:health @target)))]
+     (when (and (pos? aid) (pos? (:mana @healer)))
+       (commute healer update :mana - (max 5 (/ aid 5)))
+       (alter target update :health + aid)))))
 (heal gandalf bilbo)
 
 ;;STM缺点以及clojure的解决方案:
@@ -56,9 +56,9 @@
 ;;理论上可以放可变对象,但会出现不可预料的结果
 (def x (ref (ArrayList.)))
 (common/wait-futures 2 (dosync
-                         (dotimes [v 5]
-                           (Thread/sleep (rand-int 50))
-                           (alter x #(doto % (.add v))))))
+                        (dotimes [v 5]
+                          (Thread/sleep (rand-int 50))
+                          (alter x #(doto % (.add v))))))
 
 @x
 ;=[0 0 1 2 0 3 4 0 1 2 3 4].有4个0,显然是有问题的
@@ -89,8 +89,8 @@
 (def a (ref 0))
 (future (dotimes [_ 500]
           (dosync
-            (Thread/sleep 200)
-            (alter a inc))))
+           (Thread/sleep 200)
+           (alter a inc))))
 @(future (dosync (Thread/sleep 1000) @a))
 ;=128,说明读取事务在所有写事务完成之前提交成功了
 (ref-history-count a)
@@ -100,8 +100,8 @@
 (dosync (ref-set a 0))
 (future (dotimes [_ 500]
           (dosync
-            (Thread/sleep 20)
-            (alter a inc))))
+           (Thread/sleep 20)
+           (alter a inc))))
 @(future (dosync (Thread/sleep 1000) @a))
 ;=500,说明读取事务在所有写事务完成之后才提交成功
 (ref-history-count a)
@@ -111,8 +111,8 @@
 (def a (ref 0 :max-history 100))
 (future (dotimes [_ 500]
           (dosync
-            (Thread/sleep 20)
-            (alter a inc))))
+           (Thread/sleep 20)
+           (alter a inc))))
 @(future (dosync (Thread/sleep 1000) @a))
 ;=500,还是不对
 (ref-history-count a)
@@ -123,8 +123,8 @@
 ;选择50作为最小历史版本长度,是因为读事务比写事务慢50倍
 (future (dotimes [_ 500]
           (dosync
-            (Thread/sleep 20)
-            (alter a inc))))
+           (Thread/sleep 20)
+           (alter a inc))))
 @(future (dosync (Thread/sleep 1000) @a))
 ;=47,成功!
 (ref-history-count a)
@@ -137,7 +137,7 @@
 (defn attack
   [aggressor target]
   (dosync
-    (let [damage (* (rand 0.1) (:strength @aggressor) (ensure daylight))]
-      (println damage "," @daylight)
-      (commute target update-in [:health] #(max 0 (- % damage))))))
+   (let [damage (* (rand 0.1) (:strength @aggressor) (ensure daylight))]
+     (println damage "," @daylight)
+     (commute target update-in [:health] #(max 0 (- % damage))))))
 ;ensure保证了daylight读取到的daylight是最新的,它在语义上和(alter a identity)和(ref-set a @a)是等效的,但它可以最小化重试的次数
