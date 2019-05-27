@@ -23,4 +23,5 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot [learnclojure.core]}}
   ;:aot :all
-  :global-vars {*warn-on-reflection* true})
+  :global-vars {*warn-on-reflection* true}
+  :java-source-paths ["java"])

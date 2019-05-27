@@ -21,10 +21,10 @@
                 nil)
     scaled))
 (gen-class
-  :name learnclojure.ch9.ResizeImage
-  :main true
-  :methods [^static [resizeFile [String String String] void]
-            ^static [resize [java.awt.Image double] java.awt.image.BufferedImage]])
+ :name learnclojure.ch9.ResizeImage
+ :main true
+ :methods [^static [resizeFile [String String String] void]
+           ^static [resize [java.awt.Image double] java.awt.image.BufferedImage]])
 (def ^:private -resize resize-image)
 (defn- -resizeFile
   [path outpath factor]

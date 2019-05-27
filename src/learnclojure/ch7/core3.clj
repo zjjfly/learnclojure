@@ -26,18 +26,16 @@
 (run (reify Runnable
        (run [_] (print "hello!"))))
 (run ^{:type :runnable-map}
-     {:run #(print "hello!") :other :data})
-
+ {:run #(print "hello!") :other :data})
 
 ;之前的转发函数都只依赖参数的返回值,但其实没有这种限制
 (def prioripties (atom {:911-call :high
                         :evacuation :high
                         :pothole-report :low
-                        :tree-down :low
-                        }))
+                        :tree-down :low}))
 (defmulti route-message
-          (fn [message]
-            ((:type message) @prioripties)))
+  (fn [message]
+    ((:type message) @prioripties)))
 (defmethod route-message :high
   [{:keys [type]}]
   (println (format "Alter the authorities,this is a %s!" (name type))))
