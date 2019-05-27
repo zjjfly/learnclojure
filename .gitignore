@@ -10,3 +10,4 @@ pom.xml.asc
 /.idea
 .nrepl-history
 *.log
+*.txt
