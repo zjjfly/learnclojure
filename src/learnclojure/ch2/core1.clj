@@ -1,5 +1,5 @@
 (ns learnclojure.ch2.core1
-  (:import (common StatefulInteger))
+  (:import (learnclojure.ch2 StatefulInteger))
   (:require [clojure.string :as string]))
 ;;函数式编程的特点：
 ;;1.喜欢操作不可变值

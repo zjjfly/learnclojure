@@ -19,9 +19,25 @@
                  [enlive "1.1.6"]
                  [junit/junit "4.12"]]
   :main ^:skip-aot learnclojure.core
-  :plugins [[lein-cljfmt "0.5.7"]]
+  :plugins [[lein-cljfmt "0.5.7"]
+            [lein-junit "1.1.9"]]
   :target-path "target/%s"
-  :profiles {:uberjar {:aot [learnclojure.core]}}
-  ;:aot :all
+  :test-paths ["test/clj" "test/java"]
+  :source-paths ["src"]
+  :resource-paths ["src/resources" "test/resources"]
+  :java-source-paths ["java"]
+  :junit ["test/java"]
+  :junit-formatter :plain
+  :junit-results-dir "test-results"
+  :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
+  ;在编译java之前先编译CustomException.cjl,因为BatchJob用到了它
+  :prep-tasks [["compile" "learnclojure.ch9.custom-exception"]
+               ["compile" "learnclojure.ch9.annotation"]
+               "javac" "compile"]
+  :profiles {:uberjar {:aot [learnclojure.core
+                             learnclojure.ch9.imaging
+                             learnclojure.ch9.custom-exception]}}
+  ;:aot声明的命名空间会在compile阶段进行编译
+  :aot [learnclojure.ch9.custom-exception-test]
   :global-vars {*warn-on-reflection* true}
-  :java-source-paths ["java"])
+  )

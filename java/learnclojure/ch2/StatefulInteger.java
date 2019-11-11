@@ -1,4 +1,4 @@
-package common;
+package learnclojure.ch2;
 /**
  * Created by jjzi on 2015/9/30.
  */
