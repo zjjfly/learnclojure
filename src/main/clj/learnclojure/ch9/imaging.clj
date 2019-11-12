@@ -1,5 +1,5 @@
 (ns learnclojure.ch9.imaging
-  (:use [clojure.java.io :only [file resource]])
+  (:use [clojure.java.io :only [file]])
   (:import [java.awt Image Graphics2D]
            javax.imageio.ImageIO
            java.awt.image.BufferedImage
