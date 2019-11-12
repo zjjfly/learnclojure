@@ -1,10 +1,10 @@
 (ns learnclojure.ch9.annotation
   (:import (org.junit Test Assert))
   (:gen-class
-    :name learnclojure.ch9.JunitTest
-    :methods [[^{org.junit.Test true} simpleTest [] void]
-              [^{org.junit.Test {:timeout 2000}} timeoutTest [] void]
-              [^{org.junit.Test {:expected NullPointerException}} badException [] void]]))
+   :name learnclojure.ch9.JunitTest
+   :methods [[^{org.junit.Test true} simpleTest [] void]
+             [^{org.junit.Test {:timeout 2000}} timeoutTest [] void]
+             [^{org.junit.Test {:expected NullPointerException}} badException [] void]]))
 
 (defn -simpleTest
   [this]

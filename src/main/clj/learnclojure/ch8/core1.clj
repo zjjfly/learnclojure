@@ -3,11 +3,11 @@
 ;当前命名空间
 *ns*
 (defn a [] 42)
-;#object[clojure.lang.Namespace 0x27b9c81 "learnclojure.ch8.core1"]
+;#object[clojure.lang.Namespace 0x27b9c81 "main.clj.learnclojure.ch8.core1"]
 ;转到其他命名空间
 (in-ns 'charpt1.core1)
 (def ^:const planck 6.21e-1)
-;#'learnclojure.ch1.core1/planck
+;#'main.clj.learnclojure.ch1.core1/planck
 
 ;下面的代码会报错,因为in-ns不像ns那样会默认(refer 'clojure/core)
 ;(+ 1 1)

@@ -1,5 +1,5 @@
 (ns learnclojure.ch9.imaging
-  (:use [clojure.java.io :only [file]])
+  (:use [clojure.java.io :only [file resource]])
   (:import [java.awt Image Graphics2D]
            javax.imageio.ImageIO
            java.awt.image.BufferedImage
@@ -21,10 +21,10 @@
                 nil)
     scaled))
 (gen-class
-  :name learnclojure.ch9.ResizeImage
-  :main true
-  :methods [^:static [resizeFile [String String String] void]
-            ^:static [resize [java.awt.Image double] java.awt.image.BufferedImage]])
+ :name learnclojure.ch9.ResizeImage
+ :main true
+ :methods [^:static [resizeFile [String String String] void]
+           ^:static [resize [java.awt.Image double] java.awt.image.BufferedImage]])
 (def ^:private -resize resize-image)
 (defn- -resizeFile
   [path outpath factor]

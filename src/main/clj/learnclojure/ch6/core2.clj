@@ -37,7 +37,7 @@
 ;IllegalArgumentException: Unable to resolve classname: Circle
 (import 'learnclojure.ch6.core2.Circle)
 (Circle. 1 1 2)
-;#learnclojure.ch6.core2.Circle{:x 1, :y 1, :r 2}
+;#main.clj.learnclojure.ch6.core2.Circle{:x 1, :y 1, :r 2}
 (in-ns 'learnclojure.ch6.core2)
 ;defrecord其实是deftype的变体,它添加了下面的额外特性:
 ;1.值语义
@@ -58,7 +58,7 @@
   (dissoc p :x))
 ;这里额外添加的字段实际没有添加到底层的Java类中,而是放到了一个单独的clojure的hashmap中
 ;(.z (assoc (Circle. 1 2 3) :z 5))
-;IllegalArgumentException: No matching field found: z for class learnclojure.ch6.core2.Circle
+;IllegalArgumentException: No matching field found: z for class main.clj.learnclojure.ch6.core2.Circle
 
 ;记录类型还实现了java.util.Map接口,所以可以把记录类型传给任意接受Map作为参数的方法
 
@@ -71,9 +71,9 @@
 ;4.对clojure reader的支持,可以直接通过clojure reader读入一个记录类型
 ;对于记录类型,repl使用一种特殊的表示法来打印出来
 (Circle. 1 2 3)
-;#learnclojure.ch6.core2.Circle{:x 1, :y 2, :r 3},这是一个记录字面量,和vector的[],关键字的冒号是一样的
+;#main.clj.learnclojure.ch6.core2.Circle{:x 1, :y 2, :r 3},这是一个记录字面量,和vector的[],关键字的冒号是一样的
 ;这意味着reader读入这个字符串可以直接解析为一个记录类型
-(= (read-string "#learnclojure.ch6.core2.Circle{:x 1, :y 2, :r 3}")
+(= (read-string "#main.clj.learnclojure.ch6.core2.Circle{:x 1, :y 2, :r 3}")
    (Circle. 1 2 3))
 ;true
 ;这意味使用记录类型来存储和获取数据是很方便的,和json一样
@@ -81,7 +81,7 @@
 ;5.一个额外的方便的构造函数,使得我们可以在构造实例的时候添加一些元数据和一些额外的字段
 ;它提供了额外的构造函数多了两个参数,一个是元数据的map,一个是额外字段的map
 (def circle (Circle. 1 2 3 {:foo :bar} {:z 4}))
-;#learnclojure.ch6.core2.Circle{:x 1, :y 2, :r 3, :z 4}
+;#main.clj.learnclojure.ch6.core2.Circle{:x 1, :y 2, :r 3, :z 4}
 (meta circle)
 ;{:foo :bar}
 
@@ -120,7 +120,7 @@
   {:pre [(pos? r)]}
   (->Circle x y r))
 (map-circle {:x 3 :y 2 :r 1})
-;#learnclojure.ch6.core2.Circle{:x 3, :y 2, :r 1}
+;#main.clj.learnclojure.ch6.core2.Circle{:x 3, :y 2, :r 1}
 (defn circle-map
   [{:keys [x y r]}]
   {:x x :y y :r r})
@@ -134,7 +134,7 @@
 
 ;从map转到记录类型有一个陷阱:记录类型自身不是函数
 ;((get-circle 1 2 3) :x)
-;ClassCastException: learnclojure.ch6.core2.Circle cannot be cast to clojure.lang.IFn
+;ClassCastException: main.clj.learnclojure.ch6.core2.Circle cannot be cast to clojure.lang.IFn
 
 ;还有一个陷阱是:记录类型和map永远不可能相对
 (def circle (get-circle 1 2 3))

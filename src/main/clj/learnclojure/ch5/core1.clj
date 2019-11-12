@@ -63,7 +63,7 @@
 ;和引述不同的有两点:1.无命名空间限定的符号求值成当前命名空间的符号
 (def foo 123)
 [foo (quote foo) 'foo `foo]
-;[123 foo foo main.clojure.learnclojure.ch5.core1/foo]
+;[123 foo foo main.clojure.main.clj.learnclojure.ch5.core1/foo]
 ;;在哪个命名空间下,语法引述的结果就是哪个命名空间下的符号
 (in-ns 'bar)
 `foo

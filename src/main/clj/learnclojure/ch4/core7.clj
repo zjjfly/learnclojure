@@ -36,11 +36,11 @@ map
   (+ a c))
 (repl/doc a)
 ;-------------------------
-;main.clojure.learnclojure.ch4.other-ns/a
+;main.clojure.main.clj.learnclojure.ch4.other-ns/a
 ;A simple value
 (repl/doc b)
 ;-------------------------
-;main.clojure.learnclojure.ch4.other-ns/b
+;main.clojure.main.clj.learnclojure.ch4.other-ns/b
 ;([c])
 ;A simple function
 
@@ -48,16 +48,16 @@ map
 (meta #'a)
 ;{:line 30,
 ; :column 1,
-; :file "/Users/zjjfly/idea works/learnclojure/src/learnclojure/ch4/core7.clj",
+; :file "/Users/zjjfly/idea works/main.clj.learnclojure/src/main.clj.learnclojure/ch4/core7.clj",
 ; :doc "A simple value",
 ; :name a,
-; :ns #object[clojure.lang.Namespace 0xd840d8b "main.clojure.learnclojure.ch4.other-ns"]}
+; :ns #object[clojure.lang.Namespace 0xd840d8b "main.clojure.main.clj.learnclojure.ch4.other-ns"]}
 
 ;;使用alter-meta!来修改文档,很少这么做,但在编写定义var的宏的时候很有用
 (alter-meta! #'a assoc :doc "A dummy value!")
 (repl/doc a)
 ;-------------------------
-;main.clojure.learnclojure.ch4.other-ns/a
+;main.clojure.main.clj.learnclojure.ch4.other-ns/a
 ;  A dummy value!
 
 ;;常量var

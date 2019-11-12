@@ -113,7 +113,7 @@
   (prn (macroexpand '^String (OR a b))))
 ;(let* [or__2620__auto__ a
 ;      ^{:line 113, :column 22, :tag String}
-;       res2635 (if or__2620__auto__ or__2620__auto__ (main.clojure.learnclojure.ch5.core3/OR b))]
+;       res2635 (if or__2620__auto__ or__2620__auto__ (main.clojure.main.clj.learnclojure.ch5.core3/OR b))]
 ;^{:line 113, :column 22, :tag String} res2635)
 ;;抽取出来形成函数,用于在宏中调用
 (defn preserve-metadata

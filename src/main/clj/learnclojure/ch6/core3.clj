@@ -36,7 +36,7 @@
 @felix
 ;:alive
 (schrodinger-cat)
-;#object[learnclojure.ch6.core3.SchrodingerCat 0x46a8edd0 {:status :ready, :val :dead}]
+;#object[main.clj.learnclojure.ch6.core3.SchrodingerCat 0x46a8edd0 {:status :ready, :val :dead}]
 
 ;一般情况下应用的可修改性需求可以通过clojure的引用类型,数据流类型(future,promise,delay)来满足,或者使用java.util.concurrent里的类型
 

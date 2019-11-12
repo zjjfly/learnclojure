@@ -1,7 +1,6 @@
 package learnclojure.ch9;
 
 import clojure.lang.PersistentHashMap;
-import learnclojure.ch9.CustomException;
 
 /**
  * @author zjjfly

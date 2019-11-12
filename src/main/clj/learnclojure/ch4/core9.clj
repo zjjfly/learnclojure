@@ -51,7 +51,7 @@ a
 ;error{:cause "something is wrong",
 ;       :via [{:type java.lang.Exception,
 ;              :message "something is wrong",
-;              :at [main.clojure.learnclojure.ch4.core9$eval1378$fn__1379 invoke "core9.clj" 39]}],
+;              :at [main.clojure.main.clj.learnclojure.ch4.core9$eval1378$fn__1379 invoke "core9.clj" 39]}],
 ;       :trace [[....]]}
 
 (agent-error b)

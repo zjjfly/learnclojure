@@ -6,9 +6,9 @@
   `(let [x :oops]
      ~@body))
 ;(unhygienic (println "x:" x))
-;java.lang.RuntimeException: Can't let qualified name: main.clojure.learnclojure.ch5.core2/x
+;java.lang.RuntimeException: Can't let qualified name: main.clojure.main.clj.learnclojure.ch5.core2/x
 (macroexpand-1 '(unhygienic (println "x:" x)))
-;(clojure.core/let [main.clojure.learnclojure.ch5.core2/x :oops] (println "x:" x)),因为使用了语法引述,所以x被加上了命名空间,这是不对的
+;(clojure.core/let [main.clojure.main.clj.learnclojure.ch5.core2/x :oops] (println "x:" x)),因为使用了语法引述,所以x被加上了命名空间,这是不对的
 ;;使用反引述修正这个问题
 (defmacro still-unhygienic
   [& body]
