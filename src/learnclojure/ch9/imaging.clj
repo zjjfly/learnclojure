@@ -21,14 +21,14 @@
                 nil)
     scaled))
 (gen-class
- :name learnclojure.ch9.ResizeImage
- :main true
- :methods [^:static [resizeFile [String String String] void]
-           ^:static [resize [java.awt.Image double] java.awt.image.BufferedImage]])
+  :name learnclojure.ch9.ResizeImage
+  :main true
+  :methods [^:static [resizeFile [String String String] void]
+            ^:static [resize [java.awt.Image double] java.awt.image.BufferedImage]])
 (def ^:private -resize resize-image)
 (defn- -resizeFile
   [path outpath factor]
-  (ImageIO/write (-> path load-img (resize-image factor))
+  (ImageIO/write (-> path load-img (resize-image (Double/parseDouble factor)))
                  "png"
                  (file outpath)))
 (defn -main
@@ -36,4 +36,4 @@
   (when-not (and path outpath factor)
     (println "Usage: java -jar example-uberjar.jar ResizeImage [INFILE] [OUTFILE] [SCALE]")
     (System/exit 1))
-  (-resizeFile path outpath (Double/parseDouble factor)))
+  (-resizeFile path outpath factor))
