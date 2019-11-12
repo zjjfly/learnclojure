@@ -6,7 +6,7 @@
   (:require [clojure.java.io :as io]))
 
 ;调用java类构造方法
-(slurp (URL. "https://cnn.com"))
+(slurp (URL. "https://www.baidu.com"))
 
 ;访问java类静态成员
 Double/MAX_VALUE

@@ -9,6 +9,7 @@
               :methods [[getInfo [] java.util.Map]
                         [addInfo [Object Object] void]]))
 (import 'learnclojure.ch9.CustomException)
+;把具体的实现方法用defn-声明是为了阻止其他clojure代码访问这个方法,因为它是专门给java代码调用的
 (defn- -init
   ([info message]
    [[message] (atom (into {} info))])
