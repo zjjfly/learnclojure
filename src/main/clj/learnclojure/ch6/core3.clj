@@ -5,7 +5,8 @@
            (java.awt.event ActionListener)
            (java.io File FileFilter)))
 
-;deftype用于定义最底层的框架类型,普通类型以及map用于表示应用级别的类型
+;deftype用于定义最底层的框架类型,比如新的数据结构或引用类型
+;而普通map以及记录类型用于表示应用级别的类型
 
 ;它提供了在编写底层的应用或库的时候不可避免的特性:可修改的字段
 ;但普通的字段访问还是只能通过Java互操作的语法

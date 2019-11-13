@@ -34,6 +34,10 @@
                              learnclojure.ch9.imaging
                              learnclojure.ch9.custom-exception]}}
   ;:aot声明的命名空间会在compile阶段进行编译
-  :aot [learnclojure.ch9.custom-exception-test learnclojure.ch9.annotation]
+  :aot [learnclojure.ch9.custom-exception-test
+        learnclojure.ch9.annotation
+        learnclojure.ch9.histogram
+        learnclojure.ch9.classes
+        learnclojure.ch9.protocol]
   :global-vars {*warn-on-reflection* true}
   )
