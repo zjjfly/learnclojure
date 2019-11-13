@@ -29,6 +29,8 @@
   ;在编译java之前先编译CustomException.cjl,因为BatchJob用到了它
   :prep-tasks [["compile" "learnclojure.ch9.custom-exception"]
                ["compile" "learnclojure.ch9.imaging"]
+               ["compile" "learnclojure.ch9.classes"]
+               ["compile" "learnclojure.ch9.protocol"]
                "javac" "compile"]
   :profiles {:uberjar {:aot [learnclojure.core
                              learnclojure.ch9.imaging
@@ -36,8 +38,6 @@
   ;:aot声明的命名空间会在compile阶段进行编译
   :aot [learnclojure.ch9.custom-exception-test
         learnclojure.ch9.annotation
-        learnclojure.ch9.histogram
-        learnclojure.ch9.classes
-        learnclojure.ch9.protocol]
+        learnclojure.ch9.histogram]
   :global-vars {*warn-on-reflection* true}
   )
