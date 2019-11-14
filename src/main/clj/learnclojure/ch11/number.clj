@@ -36,4 +36,33 @@
 (rationalize 0.45)
 ;9/20
 
+;在多种数字类型混合计算的时候,传播度最高的类型决定了计算结果的最终类型
+;类型的传播度由高到低:double,BigDecimal,Rationals,BigInt,long
+;这种排序保证了不会让返回值的类型是强制"有损"的.
+(+ 1 1)
+;2
+(+ 1 1.5)
+;2.5
+(+ 1 1N)
+;2N
+(+ 1.1M 1N)
+;2.2M
 
+;double是个例外,原因是两个:
+;1.double定义了一些BigDecimal不能表示的值(特别是Infinity和NaN)
+;2.double是唯一的天生不准确的数字,一个涉及不准确数字的操作返回一个暗示精确的但实际不精确的类型是有问题的
+
+;这个类型传播规则在clojure的所有的涉及到数学操作的函数都有效,因为clojure的数学操作符实际上都是clojure函数
+(defn squares-sum
+  [& vals]
+  (reduce + (map * vals vals)))
+(squares-sum 1 4 10)
+;117
+(squares-sum 1 4 10 20.5)
+;537.5
+(squares-sum 1 4 10 9N)
+;198N
+(squares-sum 1 4 10 9N 5.6M)
+;229.36M
+(squares-sum 1 4 10 25/2)
+;1093/4
