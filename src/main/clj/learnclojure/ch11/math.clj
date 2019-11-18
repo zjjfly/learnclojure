@@ -1,4 +1,5 @@
-(ns learnclojure.ch11.math)
+(ns learnclojure.ch11.math
+  (:import (java.math MathContext RoundingMode)))
 
 ;long和double提供的范围和精度通常是够用的,但在一些科学计算中可能还是不够用
 ;这种情况可以使用clojure.lang.BigInt和java.math.BigInteger来表示任意范围的整数,使用java.math.BigDecimal来表示任意精度的小数
@@ -57,5 +58,29 @@ k
 ;-80
 ;这些变体比较冗长,但可以使用set!把全局变量*unchecked-math*设置为true,这就让所有的clojure的算数操作符都不会进行溢出检查
 (set! *unchecked-math* true)
-(println 1)
-(println (+ Long/MAX_VALUE 1))
+(+ Long/MAX_VALUE 1)
+;-9223372036854775808
+;*unchecked-math*只能在命名空间中修改,所以一般会在需要关闭溢出检查的时候把它设置为true,然后在不需要的时候设置回false
+(set! *unchecked-math* false)
+;一般不用binding来设置*unchecked-math*,因为binding只在求值的时候生效,而*unchecked-math*是控制编译器行为的
+;所以这个修改可能在很久之后才会生效,这显然不符合预期
+
+
+;BigDecimal的一些操作会抛出异常
+(try
+  (/ 1M 3M)
+  (catch Exception e
+    (.printStackTrace e)))
+;java.lang.ArithmeticException: Non-terminating decimal expansion
+;为了不报错,需要加上指定取整模式和最大刻度的参数
+(.divide 1M 3M 2 BigDecimal/ROUND_HALF_UP)
+;这个代码的缺点是比较冗长,所以clojure提供了一个宏,只要提供给它想要的取整模式和刻度,它们会被传递到这个宏范围内的所有BigDecimal操作
+(with-precision 10 (/ 22M 7))
+;3.142857143M
+(with-precision 10 :rounding FLOOR
+  (/ 22M 7))
+;3.142857142M
+;还有一种方式是直接修改动态var*math-context*
+(set! *math-context* (MathContext. 10 RoundingMode/FLOOR))
+(/ 22M 7)
+;3.142857142M
