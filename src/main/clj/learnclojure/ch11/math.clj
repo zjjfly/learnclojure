@@ -78,7 +78,7 @@ k
 (with-precision 10 (/ 22M 7))
 ;3.142857143M
 (with-precision 10 :rounding FLOOR
-  (/ 22M 7))
+                (/ 22M 7))
 ;3.142857142M
 ;还有一种方式是直接修改动态var*math-context*
 (set! *math-context* (MathContext. 10 RoundingMode/FLOOR))
