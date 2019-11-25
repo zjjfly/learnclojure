@@ -76,9 +76,59 @@
   (when-not (zero? x)
     (recur (dec x))))
 ;编译器基于5推理出rec的类型是long,因而没有不一致的地方
+;但如果使用dec',recur的参数就有可能是BigInt,这种情况就会触发编译器的反射警告
 (loop [x 5]
   (when-not (zero? x)
     (recur (dec' x))))
 ;recur arg for primitive local: x is not matching primitive, had: Object, needed: long
 ;Auto-boxing loop arg: x
+;如果传递一个不兼容的原始类型给recur,也会触发发射的警告
+(loop [x 5]
+  (when-not (zero? x)
+    (recur 0.0)))
+;recur arg for primitive local: x is not matching primitive, had: double, needed: long
+;Auto-boxing loop arg: x
+;编译器不止在函数体内检查类型,如果一个函数返回double,你把它的返回值传给recur,同样会触发警告
+(defn dfoo ^double [^double a] a)
+(loop [x 5]
+  (when-not (zero? x)
+    (recur (dfoo (dec x)))))
+;recur arg for primitive local: x is not matching primitive, had: double, needed: long
+;Auto-boxing loop arg: x
+;这种情况可以使用原始类型强制函数long来避免触发警告
+(loop [x 5]
+  (when-not (zero? x)
+    (recur (long (dfoo (dec x))))))
+;这些原始类型强制函数大多数用于消除与反射或自动封装相关的警告,再看一个例子
+(defn round
+  [v]
+  (Math/round v))
+;Reflection warning,call to static method round on java.lang.Math can't be resolved (argument types: unknown).
+(defn round
+  [v]
+  (Math/round (double v)))
+;当用于其他场景时,类型强制函数返回它所指示的类型对应的值,和Java中的类型强制声明是一样的
 
+;在必要的时候,使用原始类型数组是合理的,只要这个数组是函数的局部变量,这个函数还是符合幂等性的
+;以实现一个frequencies来举例
+(defn vector-histogram
+  [data]
+  (reduce (fn [hist v]
+            (update-in hist [v] inc))
+          (vec (repeat 10 0))
+          data))
+;看一下这个实现的效率
+(def data (doall (repeatedly 1e6 #(rand-int 10))))
+(time (vector-histogram data))
+;Elapsed time: 98.706918 msecs
+;使用long数组实现
+(defn array-histogram
+  [data]
+  (vec
+   (reduce (fn [^longs hist v]
+             (aset hist v (inc (aget hist v)))
+             hist)
+           (long-array 10)
+           data)))
+(time (array-histogram data))
+;Elapsed time: 23.919621 msecs
