@@ -132,3 +132,25 @@
            data)))
 (time (array-histogram data))
 ;Elapsed time: 23.919621 msecs
+
+;aget和aset也要求数组类型是已知的来避免使用反射
+(let [arr (long-array 10)]
+  (aset arr 0 50)
+  (aget arr 0))
+
+;map和reduce也是可以用于数组的,但会引起对原始类型的自动封装
+;使用loop替代它们,但这样要自己跟踪管理数组的下标,容易出错
+;为此,clojure提供了两个宏amap和areduce用来操作数组同时避免自动封装
+
+(let [a (int-array (range 10))]
+  (vec
+    (amap a i res
+         (inc (aget a i)))))
+;[1 2 3 4 5 6 7 8 9 10]
+;amap的第一个参数时源数组,第二个参数是下标的名称,第三个是结果数组的名称,第四个是一个表达式,它的结果会设置为结果数组的下标i的值
+
+(let [a (int-array (range 10))]
+  (areduce a i sum 0
+        (+ sum (aget a i))))
+;前面两个参数和amap是一样的,第三个参数是累加器的名称,第四个是累加器的初始值,最后是一个表达式,它的值会成为下一次迭代的累加器的值和迭代结束之后的返回结果
+
