@@ -125,11 +125,11 @@
 (defn array-histogram
   [data]
   (vec
-    (reduce (fn [^longs hist v]
-              (aset hist v (inc (aget hist v)))
-              hist)
-            (long-array 10)
-            data)))
+   (reduce (fn [^longs hist v]
+             (aset hist v (inc (aget hist v)))
+             hist)
+           (long-array 10)
+           data)))
 (time (array-histogram data))
 ;Elapsed time: 23.919621 msecs
 
@@ -182,8 +182,8 @@
 
 (let [a (int-array (range 10))]
   (vec
-    (amap a i res
-          (inc (aget a i)))))
+   (amap a i res
+         (inc (aget a i)))))
 ;[1 2 3 4 5 6 7 8 9 10]
 ;amap的第一个参数时源数组,第二个参数是下标的名称,第三个是结果数组的名称,第四个是一个表达式,它的结果会设置为结果数组的下标i的值
 
@@ -224,7 +224,7 @@
                 ints int ,shorts short
                 doubles double,floats float}
         hint (-> array meta :tag)
-        [v idx & sxdi ] (reverse idxsv)
+        [v idx & sxdi] (reverse idxsv)
         idxs (reverse sxdi)
         v (if-let [h (hints hint)] (list h v) v)
         nested-array (if (seq idxs)

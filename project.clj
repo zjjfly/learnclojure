@@ -17,6 +17,7 @@
                  [mysql/mysql-connector-java "5.1.42"]
                  [org.clojure/core.memoize "0.7.1"]
                  [enlive "1.1.6"]
+                 [robert/hooke "1.3.0"]
                  [junit/junit "4.12"]]
   :main ^:skip-aot learnclojure.core
   :plugins [[lein-cljfmt "0.5.7"]]

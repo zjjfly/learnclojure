@@ -60,7 +60,7 @@
 
 ;但如果要放大这个图,需要对escape进行优化
 (do (time (mandelbrot -2.25 0.75 -1.5 1.5
-                       :width 1600 :height 1200 :depth 1000))
+                      :width 1600 :height 1200 :depth 1000))
     nil)
 ;Elapsed time: 1465.814648 msecs
 (defn- escape
