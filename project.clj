@@ -14,7 +14,7 @@
                  ; Password Hashing
                  [buddy/buddy-hashers "1.3.0"]
                  [korma "0.4.3"]
-                 [mysql/mysql-connector-java "5.1.42"]
+                 [mysql/mysql-connector-java "8.0.15"]
                  [org.clojure/core.memoize "0.7.1"]
                  [enlive "1.1.6"]
                  [robert/hooke "1.3.0"]

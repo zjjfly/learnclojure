@@ -48,7 +48,7 @@
 
 ;;显然，seq和conj对于它们所操作的集合类型是多态的
 ;;clojure的精髓是小而易用的编程接口，在接口上再构建辅助函数
-;;例如into函数,它是建立在conj和seq之上的,所以能用于任何支撑conj和seq的值
+;;例如into函数,它是建立在conj和seq之上的,所以能用于任何支持conj和seq的值
 (into v [4 5])
 (into m [[:c 7] [:d 8]])
 (into s [3 4])
