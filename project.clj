@@ -11,6 +11,8 @@
                  ; Database
                  [toucan "1.1.9"]
                  [org.postgresql/postgresql "42.2.4"]
+                 [com.mchange/c3p0 "0.9.5.2"]
+                 [org.hibernate/hibernate-core "5.3.7.Final"]
                  ; Password Hashing
                  [buddy/buddy-hashers "1.3.0"]
                  [korma "0.4.3"]

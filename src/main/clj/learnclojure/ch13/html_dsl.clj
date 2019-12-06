@@ -23,15 +23,15 @@
 ;使用are可以避免写过多的(is (= expected (f input)))这样的表达式
 (deftest test-addtion
   (are [x y z] (= x (+ y z))
-               10 7 3
-               20 10 10
-               100 89 11))
+    10 7 3
+    20 10 10
+    100 89 11))
 (run-tests)
 ;are有助于减少每个断言的重复,但仍然有需要重复这个转换
 ;可以写一个宏来避免
 (defmacro are* [f & body]
   `(are [x# y#] (~'= (~f x#) y#)
-                ~@body))
+     ~@body))
 (deftest test-tostring
   (are* str
         10 "10"
