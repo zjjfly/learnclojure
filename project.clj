@@ -4,12 +4,7 @@
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 ; Web
-                 [prismatic/schema "1.1.9"]
-                 [metosin/compojure-api "2.0.0-alpha26"]
-                 [ring/ring-jetty-adapter "1.6.3"]
                  ; Database
-                 [toucan "1.1.9"]
                  [org.postgresql/postgresql "42.2.4"]
                  [com.mchange/c3p0 "0.9.5.2"]
                  [org.hibernate/hibernate-core "5.3.7.Final"]
